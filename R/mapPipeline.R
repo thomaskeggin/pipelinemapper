@@ -1,0 +1,50 @@
+# This function calls mapScript to map out a pipeline.
+# Input: a directory with pipeline scripts
+# Output: a data frame with script inputs and outputs
+
+mapPipeline <-
+  function(pipeline_directory_path){
+
+    # clean the paths
+    pipeline_path_end <-
+      substr(x     = pipeline_directory_path,
+             start = nchar(pipeline_directory_path),
+             stop  = nchar(pipeline_directory_path))
+
+    if(pipeline_path_end != "/"){
+      pipeline_directory_path <-
+        paste0(pipeline_directory_path,"/")
+    }
+
+    # vector of script names in target directory
+    pipeline_scripts <-
+      list.files(pipeline_directory_path)
+
+    # container for flow information
+    project_flow <-
+      list()
+
+    # map each script in the pipeline
+    for(script in pipeline_scripts){
+
+      project_flow[[script]] <-
+        mapScript(paste0(pipeline_directory_path,
+                         script))
+    }
+
+    # compile into a single data frame with NAs for scripts without tags
+    flow_df <-
+      do.call(rbind.data.frame,
+              project_flow)
+
+    flow_df$file <-
+      paste(flow_df$file_path,
+            flow_df$file)
+
+    flow_df$script <-
+      paste(flow_df$script_path,
+            flow_df$script)
+
+    # return compiled data frame
+    return(flow_df)
+  }
