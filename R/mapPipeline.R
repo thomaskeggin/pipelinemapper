@@ -1,6 +1,7 @@
 # This function calls mapScript to map out a pipeline.
 # Input: a directory with pipeline scripts
 # Output: a data frame with script inputs and outputs
+#' @export
 
 mapPipeline <-
   function(pipeline_directory_path){

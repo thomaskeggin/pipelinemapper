@@ -3,6 +3,7 @@
 # Hope it's useful!
 # Thomas Keggin
 # thomaskeggin@hotmail.com
+#' @export
 
 mapScript <-
   function(script_path,

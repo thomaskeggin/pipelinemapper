@@ -1,6 +1,7 @@
 # This function converts a pipeline data frame into a graph object
 # input: pipeline data frame
 # output: pipeline graph object
+#' @export
 
 graphPipeline <-
   function(pipeline_dataframe){

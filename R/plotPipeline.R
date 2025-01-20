@@ -1,6 +1,7 @@
 # this function plots a pipeline graph using ggraph
 # input: an igraph pipeline object
 # output: a ggprah pplot object
+#' @export
 
 plotPipeline <-
   function(pipeline_graph){
