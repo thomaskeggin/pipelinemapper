@@ -27,7 +27,7 @@ mapScript <-
     # extract outputs
     if(length(file[grepl(output_tag,file)]) > 0){
       in_out$outputs <-
-        data.frametibble(file = file[grepl(output_tag,file)],
+        data.frame(file = file[grepl(output_tag,file)],
                          direction = "out")
     }
 
