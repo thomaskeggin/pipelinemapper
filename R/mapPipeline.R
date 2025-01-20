@@ -4,9 +4,10 @@
 #' @export
 
 mapPipeline <-
-  function(pipeline_directory_path){
+  function(pipeline_directory_path,
+           file_extensions = c(".r",".rmd",".qmd")){
 
-    # clean the paths
+    # clean the pipeline path
     pipeline_path_end <-
       substr(x     = pipeline_directory_path,
              start = nchar(pipeline_directory_path),
@@ -20,6 +21,16 @@ mapPipeline <-
     # vector of script names in target directory
     pipeline_scripts <-
       list.files(pipeline_directory_path)
+
+    # reformat file extensions to work with grep
+    file_extensions <-
+      gsub("\\.","\\\\.",file_extensions)
+
+    # keep only target file types
+    pipeline_scripts <-
+      pipeline_scripts[grepl(paste(file_extensions,collapse = "|"),
+                             pipeline_scripts,
+                             ignore.case = TRUE)]
 
     # container for flow information
     project_flow <-
