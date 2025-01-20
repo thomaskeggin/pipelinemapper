@@ -18,9 +18,9 @@ plotPipeline <-
                                 fill = type)) +
 
       # edges
-      ggraph::geom_edge_diagonal(arrow = arrow(length = unit(4, 'mm'),type = "closed"),
-                                 start_cap = circle(10, 'mm'),
-                                 end_cap = circle(10, 'mm'),
+      ggraph::geom_edge_diagonal(arrow = ggplot2::arrow(length = ggplot2::unit(4, 'mm'),type = "closed"),
+                                 start_cap = ggraph::circle(10, 'mm'),
+                                 end_cap = ggraph::circle(10, 'mm'),
                                  #edge_width = 1.5,
                                  edge_alpha = 1,
                                  edge_color = "grey") +
