@@ -11,9 +11,9 @@ plotPipeline <-
                    circular = FALSE) +
 
       # nodes
-      ggraph::geom_node_point(aes(colour = type)) +
+      ggraph::geom_node_point(ggplot2::aes(colour = type)) +
       ggraph::geom_node_label(repel = TRUE,
-                              aes(#label = str_wrap(name, width = 10),
+                              ggplot2::aes(#label = str_wrap(name, width = 10),
                                 label = sub(".*? ", "", name),
                                 fill = type)) +
 
