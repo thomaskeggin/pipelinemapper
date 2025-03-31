@@ -1,7 +1,19 @@
-# this function plots a pipeline graph using ggraph
-# input: an igraph pipeline object
-# output: a ggprah pplot object
+
+#' Plots a pipeline graph
+#'
+#' This is a default way of plotting the igraph object returned by [graphPipeline()]
+#' using ggraph and ggplot2. If you would like to customise the plot, it is
+#' probably easier to refer directly to igraph, ggraph, and ggplot2
+#' documentation.
+#'
+#' @param pipeline_graph A pipeline igraph object returned by [graphPipeline()].
+#'
+#' @returns A ggraph plot object
 #' @export
+#'
+#' @examples
+#' 1 + 1
+#'
 
 plotPipeline <-
   function(pipeline_graph){
@@ -24,14 +36,7 @@ plotPipeline <-
                                  #edge_width = 1.5,
                                  edge_alpha = 1,
                                  edge_color = "grey") +
-      #geom_edge_diagonal(aes(start_cap = label_rect(node1.name),
-      #                       end_cap = label_rect(node2.name)),
-      #                   arrow = arrow(length = unit(4, 'mm')),
-      #                   edge_width = 1.5,
-      #                   edge_alpha = 0.5) +
 
-      #coord_flip() +
-      #scale_y_reverse() +
       ggplot2::scale_fill_manual(values = c("lightgrey","#88CCEE")) +
       ggplot2::scale_colour_manual(values = c("black","#88CCEE")) +
       ggplot2::theme_void()
