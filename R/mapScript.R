@@ -1,8 +1,12 @@
-# This function reads a script and extracts input and output paths tagged with
-# something like "#input" or "#output" (it can be anything).
-# Hope it's useful!
-# Thomas Keggin
-# thomaskeggin@hotmail.com
+#' Extract input and output files from a pipeline script.
+#'
+#' @param script_path The path to the target script as a character string.
+#' @param input_tag A character tag for input paths within the target script.
+#' @param output_tag A character tag for output paths within the target script.
+#' @returns A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction (in or out)
+#' @examples
+#' 1 + 1
+#'
 #' @export
 
 mapScript <-
@@ -15,6 +19,7 @@ mapScript <-
       readLines(script_path,
                 warn = FALSE)
 
+    # extract inputs and outputs
     in_out <- list()
 
     # extract inputs
