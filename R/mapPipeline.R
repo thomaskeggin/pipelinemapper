@@ -1,7 +1,23 @@
-# This function calls mapScript to map out a pipeline.
-# Input: a directory with pipeline scripts
-# Output: a data frame with script inputs and outputs
+
+#' Generates a data frame of file inputs and outputs for scripts within a pipeline directory.
+#'
+#'This script loops [mapScript()] through all scripts within a target directory
+#' containing the specified file extensions. The inputs and outputs are compiled
+#' into a single output data frame.
+#'
+#'
+#' @param pipeline_directory_path The path to the pipeline directory.
+#' @param file_extensions A character vector containing all file extensions to be considered.
+#'
+#' @returns A data frame containing five columns: input/output file name,
+#' input/output path, script name, script path, and direction (in or out).
 #' @export
+#'
+#' @examples
+#'
+#' 1 + 1
+#'
+#'
 
 mapPipeline <-
   function(pipeline_directory_path,
@@ -45,18 +61,18 @@ mapPipeline <-
     }
 
     # compile into a single data frame with NAs for scripts without tags
-    flow_df <-
+    pipeline_dataframe <-
       do.call(rbind.data.frame,
               project_flow)
 
-    flow_df$file <-
-      paste(flow_df$file_path,
-            flow_df$file)
+    pipeline_dataframe$file <-
+      paste(pipeline_dataframe$file_path,
+            pipeline_dataframe$file)
 
-    flow_df$script <-
-      paste(flow_df$script_path,
-            flow_df$script)
+    pipeline_dataframe$script <-
+      paste(pipeline_dataframe$script_path,
+            pipeline_dataframe$script)
 
     # return compiled data frame
-    return(flow_df)
+    return(pipeline_dataframe)
   }
