@@ -4,10 +4,13 @@
 \alias{plotPipeline}
 \title{Plots a pipeline graph}
 \usage{
-plotPipeline(pipeline_graph)
+plotPipeline(pipeline_graph, show_full_paths = TRUE)
 }
 \arguments{
 \item{pipeline_graph}{A pipeline igraph object returned by \code{\link[=graphPipeline]{graphPipeline()}}.}
+
+\item{show_full_paths}{Whether or not full file paths should be displayed.
+show_full_paths = FALSE only displays the file basenames.}
 }
 \value{
 A ggraph plot object
@@ -22,6 +25,6 @@ documentation.
 example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
 pipeline_dataframe <- mapPipeline(example_directory)
 pipeline_graph <- graphPipeline(pipeline_dataframe)
-plotPipeline(pipeline_graph)
+plotPipeline(pipeline_graph, show_full_paths = TRUE)
 
 }
