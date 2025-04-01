@@ -10,8 +10,8 @@ graphPipeline(pipeline_dataframe)
 \item{pipeline_dataframe}{An input/output data frame returned by \code{\link[=mapPipeline]{mapPipeline()}}.}
 }
 \value{
-A directional igraph object describing the workflow of the mapped
-pipeline directory.
+A directional igraph describing the workflow of the mapped
+pipeline.
 }
 \description{
 Convert a pipeline input/output data frame into an igraph object.

@@ -12,7 +12,7 @@
 #' @param output_tag A character tag for output paths within the target pipeline
 #'
 #' @returns A data frame containing five columns: input/output file name,
-#' input/output path, script name, script path, and direction (in or out).
+#' input/output path, script name, script path, and direction ("in" or "out").
 #' @export
 #'
 #' @examples

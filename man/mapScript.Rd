@@ -14,7 +14,7 @@ mapScript(script_path, input_tag = "#input", output_tag = "#output")
 \item{output_tag}{A character tag for output paths within the target script.}
 }
 \value{
-A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction (in or out)
+A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction ("in" or "out")
 }
 \description{
 Extract input and output files from a pipeline script.

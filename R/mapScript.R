@@ -3,7 +3,7 @@
 #' @param script_path The path to the target script as a character string.
 #' @param input_tag A character tag for input paths within the target script.
 #' @param output_tag A character tag for output paths within the target script.
-#' @returns A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction (in or out)
+#' @returns A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction ("in" or "out")
 #' @examples
 #' example_script <- system.file("dummy_pipeline/01_load_data.R", package = "pipelinemapper")
 #' mapScript(example_script,input_tag  = "#input",output_tag = "#output")

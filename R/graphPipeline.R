@@ -3,8 +3,8 @@
 #'
 #' @param pipeline_dataframe An input/output data frame returned by [mapPipeline()].
 #'
-#' @returns A directional igraph object describing the workflow of the mapped
-#' pipeline directory.
+#' @returns A directional igraph describing the workflow of the mapped
+#' pipeline.
 #'
 #' @export
 #'

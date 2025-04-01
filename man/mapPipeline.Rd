@@ -22,7 +22,7 @@ mapPipeline(
 }
 \value{
 A data frame containing five columns: input/output file name,
-input/output path, script name, script path, and direction (in or out).
+input/output path, script name, script path, and direction ("in" or "out").
 }
 \description{
 This script loops \code{\link[=mapScript]{mapScript()}} through all scripts within a target directory
