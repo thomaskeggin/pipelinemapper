@@ -95,7 +95,8 @@ object_container <-
 for(file in 1:length(input_files)){
   
   object_container[[file]] <-
-    readRDS(paste0(input_directory,file))
+    readRDS(paste0(input_directory,
+                   input_files[file]))
 }
 ```
 
