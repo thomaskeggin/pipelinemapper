@@ -1,6 +1,13 @@
-# pipelinemapper
-Thomas Keggin
-1 Apr, 2025
+---
+title: "pipelinemapper"
+author: Thomas Keggin
+date: today
+date-format: "D MMM, YYYY"
+format: gfm
+editor: 
+  markdown: 
+    wrap: 72
+---
 
 Welcome to the pipelinemapper mini-package.
 
@@ -21,7 +28,7 @@ better fit for you.
 You can install the development version of pipelinemapper directly from
 the GitHub repository.
 
-``` r
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("thomaskeggin/pipelinemapper")
 ```
@@ -31,11 +38,11 @@ devtools::install_github("thomaskeggin/pipelinemapper")
 #### Inline tags
 
 The package is built entirely around the premise of inline path tagging
-of input and output paths. If you don’t tag your scripts, then paths
-won’t be detected. There are two basic limitations:
+of input and output paths. If you don't tag your scripts, then paths
+won't be detected. There are two basic limitations:
 
 1.  **Only one path per line.**
-2.  **Paths must be a single string, i.e. not a composite, or pasted
+2.  **Paths must be a single string, i.e. not a composite, or pasted
     string (see below).**
 
 The inline tags can be whatever you want, although I find that the
@@ -46,7 +53,7 @@ It is important that tags are consistent across scripts.
 ✅ Using the default tags, a script within a pipeline could look
 something like this.
 
-``` r
+```{r, eval = FALSE}
 # load in raw data
 raw_data <-
   read.csv("data/raw_data.csv") #input
@@ -57,21 +64,23 @@ processed_data <-
 
 # write processed data
 saveRDS("processed_data/matrix_data.rds") #output
+
 ```
 
 ❌ Whilst something like this composite, or pasted, path would throw an
 error.
 
-``` r
+```{r, eval = FALSE}
 input_path_1 <-
   paste0("./external/",string_variable,".csv") #input
+
 ```
 
 ✅ If your script is looped or run in parallel to load in many files
 within a single directory, then you can tag that container directory
 instead of each file individually.
 
-``` r
+```{r, eval = FALSE}
 # define the input directory
 input_directory <-
   "path/to/inputs/" #input
@@ -99,7 +108,8 @@ your data flow is straightforward. The package only contains 4
 functions: the core `mapScript()` function, and the three wrapper
 functions which run in order.
 
-- `mapScipt()` generates an input/output data frame for a single script.
+-   `mapScipt()` generates an input/output data frame for a single
+    script.
 
 1.  `mapPipeline()` loops `mapScript()`through all files with target
     extensions in a particular directory - returning a compiled
@@ -117,7 +127,10 @@ functions which run in order.
 
 Implementation can be as simple as this:
 
-``` r
+```{r}
+#| fig-width: 6.66
+#| fig-height: 10
+
 # define your pipeline directory containing your scripts.
 pipeline_directory <-
   "inst/dummy_pipeline/"
@@ -133,9 +146,8 @@ pipelinemapper::mapPipeline(pipeline_directory_path =  pipeline_directory,
   
   # visualise the resultant igraph object
   pipelinemapper::plotPipeline(use_full_paths = FALSE)
-```
 
-![](readme_files/figure-commonmark/unnamed-chunk-5-1.png)
+```
 
 #### Note
 
@@ -144,7 +156,7 @@ possible to apply `mapPipeline()` to each directory, bind the resultant
 pipeline data frames, then convert to a single graph with
 `graphPipeline()`.
 
-``` r
+```{r, eval = FALSE}
 # define pipeline container directories
 pipeline_directory_1 <-
   "pipelines/pipeline_1" #input
@@ -167,4 +179,6 @@ composite_pipeline_dataframe <-
 # convert to pipeline graph
 composite_pipeline_graph <-
   pipelinemapper::graphPipeline(composite_pipeline_dataframe)
+
+
 ```
