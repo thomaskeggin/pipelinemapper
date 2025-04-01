@@ -1,12 +1,10 @@
 
-# load data
-external_data_1 <-
-  read.csv("./external/data_source_1.csv") #input
+input_path_1 <-
+  "./external/data_source_1.csv" #input
 
-# load data
-external_data_2 <-
-  read.csv("./external/data_source_2.csv") #input
+input_path_2 <-
+  "./external/data_source_2.csv" #input
 
 # write data
-write.csv(rbind(external_data_1,external_data_2),
-          "./internal/compiled_data.csv") #output
+output_path <-
+  "./internal/compiled_data.csv" #output
