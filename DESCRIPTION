@@ -2,7 +2,7 @@ Package: pipelinemapper
 Title: Maps script-based pipelines based on path tags
 Version: 0.0.0.9000
 Authors@R: 
-    person("Thomas", "Keggin", , "thomaskeggin@hotmail.com", role = c("aut", "cre"))
+    person("Thomas", "Keggin", , "thomaskeggin at hotmail.com", role = c("aut", "cre"))
 Description: This package uses user-added input and output path tags to
     map the workflow of a single-directory pipeline.
 License: 'use_mit_license()'
