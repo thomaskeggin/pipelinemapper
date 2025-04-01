@@ -7,6 +7,8 @@
 #' documentation.
 #'
 #' @param pipeline_graph A pipeline igraph object returned by [graphPipeline()].
+#' @param use_full_paths Whether or not full file paths should be displayed.
+#'  use_full_paths = FALSE only displays the file basenames.
 #'
 #' @returns A ggraph plot object
 #' @export
@@ -15,12 +17,22 @@
 #' example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
 #' pipeline_dataframe <- mapPipeline(example_directory)
 #' pipeline_graph <- graphPipeline(pipeline_dataframe)
-#' plotPipeline(pipeline_graph)
+#' plotPipeline(pipeline_graph, use_full_paths = TRUE)
 #'
 
 plotPipeline <-
-  function(pipeline_graph){
+  function(pipeline_graph,
+           use_full_paths = TRUE){
 
+    # remove full paths if specified
+    if(use_full_paths == FALSE){
+
+      pipeline_graph <-
+        set_vertex_attr(pipeline_graph, "name",
+                        value = basename(names(V(pipeline_graph))))
+    }
+
+    # generate plot
     ggraph::ggraph(pipeline_graph,
                    layout = "sugiyama", #"tree" "sugiyama"
                    circular = FALSE) +
@@ -43,7 +55,6 @@ plotPipeline <-
       ggplot2::scale_fill_manual(values = c("lightgrey","#88CCEE")) +
       ggplot2::scale_colour_manual(values = c("black","#88CCEE")) +
       ggplot2::theme_void()
-
 
 
   }
