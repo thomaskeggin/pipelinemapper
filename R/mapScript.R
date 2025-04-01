@@ -15,7 +15,6 @@ mapScript <-
            input_tag  = "#input",
            output_tag = "#output"){
 
-
     # read the script
     file <-
       readLines(script_path,
@@ -40,12 +39,19 @@ mapScript <-
                    file = file[grepl(output_tag,file)])
     }
 
-    # check for broken paths (one full path per line)
+    # combine inputs and outputs
+
     in_out_df <-
-      do.call(rbind.data.frame,in_out)
+      do.call(rbind.data.frame,in_out) |>
+
+      # and convert ' to "
+      dplyr::mutate(file = gsub("'",'"',file))
+
 
     # skip if no lines are tagged
     if(length(in_out_df) > 0){
+
+      # check for broken paths
       for(i in 1:dim(in_out_df)[1]){
 
         # extract line for error messages
@@ -54,7 +60,8 @@ mapScript <-
         # check tagged string
         tagged_line_path <-
           qdapRegex::rm_between(in_out_df$file[i],
-                                left = '"',right = '"',
+                                left = '"',
+                                right = '"',
                                 extract = TRUE) |>
           unlist()
 
@@ -80,7 +87,8 @@ mapScript <-
         in_out_df |>
         dplyr::mutate(file = unlist(lapply(file,
                                            qdapRegex::rm_between,
-                                           left = '"',right = '"',
+                                           left = '"',
+                                           right = '"',
                                            extract = TRUE))) |>
         dplyr::mutate(script_directory = dirname(script_path),
                       script_basename  = basename(script_path),
