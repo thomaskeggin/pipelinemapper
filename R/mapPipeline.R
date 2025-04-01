@@ -14,9 +14,8 @@
 #' @export
 #'
 #' @examples
-#'
-#' 1 + 1
-#'
+#'example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
+#'mapPipeline(example_directory)
 #'
 
 mapPipeline <-
@@ -39,12 +38,12 @@ mapPipeline <-
       list.files(pipeline_directory_path)
 
     # reformat file extensions to work with grep
-    file_extensions <-
+    file_extensions_gsub <-
       gsub("\\.","\\\\.",file_extensions)
 
     # keep only target file types
     pipeline_scripts <-
-      pipeline_scripts[grepl(paste(file_extensions,collapse = "|"),
+      pipeline_scripts[grepl(paste(file_extensions_gsub,collapse = "|"),
                              pipeline_scripts,
                              ignore.case = TRUE)]
 
@@ -66,12 +65,14 @@ mapPipeline <-
               project_flow)
 
     pipeline_dataframe$file <-
-      paste(pipeline_dataframe$file_path,
-            pipeline_dataframe$file)
+      paste(pipeline_dataframe$file_directory,
+            pipeline_dataframe$file_basename,
+            sep = "/")
 
     pipeline_dataframe$script <-
-      paste(pipeline_dataframe$script_path,
-            pipeline_dataframe$script)
+      paste(pipeline_dataframe$script_directory,
+            pipeline_dataframe$script_basename,
+            sep = "/")
 
     # return compiled data frame
     return(pipeline_dataframe)

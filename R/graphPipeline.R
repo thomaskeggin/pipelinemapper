@@ -9,7 +9,9 @@
 #' @export
 #'
 #' @examples
-#' 1 + 1
+#' example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
+#' pipeline_dataframe <- mapPipeline(example_directory)
+#' graphPipeline(pipeline_dataframe)
 #'
 #'
 
@@ -22,14 +24,14 @@ graphPipeline <-
       pipeline_dataframe |>
       dplyr::filter(direction == "in") |>
       dplyr::rename(from = file, to = script) |>
-      dplyr::select(-direction)
+      dplyr::select(from,to,script_directory,file_directory)
 
     # Create directional data frame for outputs
     outs <-
       pipeline_dataframe |>
       dplyr::filter(direction == "out") |>
-      dplyr::rename(from = script, to = file) |>
-      dplyr::select(-direction)
+      dplyr::rename(from = script, to = file)|>
+      dplyr::select(from,to,script_directory,file_directory)
 
     # Combine directional data frames into a data frame containing all
     # graph edges.
@@ -42,25 +44,23 @@ graphPipeline <-
     vertex_in <-
       ins |>
       tidyr::pivot_longer(cols = c(from,to),
-                   names_to = "direction",
-                   values_to = "name") |>
+                          names_to = "direction",
+                          values_to = "name") |>
       dplyr::mutate(type = ifelse(direction == "from","file","script")) |>
-      dplyr::select(-c(direction))
+      dplyr::select(name,type)
 
     # create a data frame defining output files
     vertex_out <-
       outs |>
       tidyr::pivot_longer(cols = c(from,to),
-                   names_to = "direction",
-                   values_to = "name") |>
+                          names_to = "direction",
+                          values_to = "name") |>
       dplyr::mutate(type = ifelse(direction == "to","file","script")) |>
-      dplyr::select(-c(direction))
+      dplyr::select(name,type)
 
     # Compile input and output vertices into a single data frame
     vertex_df <-
       rbind.data.frame(vertex_in,vertex_out) |>
-      dplyr::relocate(name) |>
-      dplyr::select(-contains("path")) |>
       dplyr::distinct()
 
     # Convert edge and vertex data frames into a directional graph -------------

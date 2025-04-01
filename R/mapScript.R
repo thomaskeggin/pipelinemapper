@@ -5,7 +5,8 @@
 #' @param output_tag A character tag for output paths within the target script.
 #' @returns A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction (in or out)
 #' @examples
-#' 1 + 1
+#' example_script <- system.file("dummy_pipeline/01_load_data.R", package = "pipelinemapper")
+#' mapScript(example_script,input_tag  = "#input",output_tag = "#output")
 #'
 #' @export
 
@@ -25,29 +26,33 @@ mapScript <-
     # extract inputs
     if(length(file[grepl(input_tag,file)]) > 0){
       in_out$inputs <-
-        data.frame(file = file[grepl(input_tag,file)],
-                   direction = "in")
+        data.frame(line = grep(input_tag,file),
+                   direction = "in",
+                   file = file[grepl(input_tag,file)])
     }
 
     # extract outputs
     if(length(file[grepl(output_tag,file)]) > 0){
       in_out$outputs <-
-        data.frame(file = file[grepl(output_tag,file)],
-                         direction = "out")
+        data.frame(line = grep(output_tag,file),
+                   direction = "out",
+                   file = file[grepl(output_tag,file)])
     }
 
     # store information
     if(length(in_out) > 0){
       flow_df <-
         do.call(rbind.data.frame,in_out) |>
-        dplyr::mutate(file        = unlist(lapply(file,
-                                                  qdapRegex::rm_between,
-                                                  left = '"',right = '"',
-                                                  extract = TRUE))) |>
-        dplyr::mutate(script      = basename(script_path),
-                      script_path = dirname(script_path),
-                      file_path   = dirname(file),
-                      file        = basename(file))
+        dplyr::mutate(file = unlist(lapply(file,
+                                           qdapRegex::rm_between,
+                                           left = '"',right = '"',
+                                           extract = TRUE))) |>
+        dplyr::mutate(script_directory = dirname(script_path),
+                      script_basename  = basename(script_path),
+                      file_directory   = dirname(file),
+                      file_basename    = basename(file)) |>
+        dplyr::relocate(file_basename, .after = file_directory) |>
+        dplyr::select(-file)
 
       return(flow_df)
     }else{
