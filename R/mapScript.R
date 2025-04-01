@@ -15,6 +15,7 @@ mapScript <-
            input_tag  = "#input",
            output_tag = "#output"){
 
+
     # read the script
     file <-
       readLines(script_path,
@@ -43,39 +44,40 @@ mapScript <-
     in_out_df <-
       do.call(rbind.data.frame,in_out)
 
-    for(i in 1:dim(in_out_df)[1]){
+    # skip if no lines are tagged
+    if(length(in_out_df) > 0){
+      for(i in 1:dim(in_out_df)[1]){
 
-      # extract line for error messages
-      line <- in_out_df$line[i]
-
-      # check tagged string
-      tagged_line_path <-
-        qdapRegex::rm_between(in_out_df$file[i],
-                              left = '"',right = '"',
-                              extract = TRUE) |>
-        unlist()
-
-      # check for multiple strings on a single line
-      if(length(tagged_line_path) > 1){
-
-        stop(paste("There are multiple strings on line",line,"in file",script_path,".\n
-                   Tagged lines can only contain one string."))
-      }
-
-      # check for missing strings
-      if(is.na(tagged_line_path)){
-
+        # extract line for error messages
         line <- in_out_df$line[i]
 
-        stop(paste("There is a missing path string on line",line," in file",script_path,".\n
-                   Tagged lines must contain a single string."))
-      }
-    }
+        # check tagged string
+        tagged_line_path <-
+          qdapRegex::rm_between(in_out_df$file[i],
+                                left = '"',right = '"',
+                                extract = TRUE) |>
+          unlist()
 
-    # store information
-    if(length(in_out) > 0){
+        # check for multiple strings on a single line
+        if(length(tagged_line_path) > 1){
+
+          stop(paste("There are multiple strings on line",line,"in file",script_path,".\n
+                   Tagged lines can only contain one string."))
+        }
+
+        # check for missing strings
+        if(is.na(tagged_line_path)){
+
+          line <- in_out_df$line[i]
+
+          stop(paste("There is a missing path string on line",line," in file",script_path,".\n
+                   Tagged lines must contain a single string."))
+        }
+      }
+
+      # store information
       flow_df <-
-        do.call(rbind.data.frame,in_out) |>
+        in_out_df |>
         dplyr::mutate(file = unlist(lapply(file,
                                            qdapRegex::rm_between,
                                            left = '"',right = '"',
@@ -91,5 +93,6 @@ mapScript <-
     }else{
       return(NA)
     }
-
   }
+
+
