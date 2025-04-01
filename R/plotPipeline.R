@@ -28,8 +28,8 @@ plotPipeline <-
     if(use_full_paths == FALSE){
 
       pipeline_graph <-
-        set_vertex_attr(pipeline_graph, "name",
-                        value = basename(names(V(pipeline_graph))))
+        igraph::set_vertex_attr(pipeline_graph, "name",
+                                value = basename(names(igraph::V(pipeline_graph))))
     }
 
     # generate plot
