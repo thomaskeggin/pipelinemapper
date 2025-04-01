@@ -9,9 +9,10 @@ editor:
     wrap: 72
 ---
 
-  <!-- badges: start -->
-  [![R-CMD-check](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml)
-  <!-- badges: end -->
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/thomaskeggin/pipelinemapper/graph/badge.svg)](https://app.codecov.io/gh/thomaskeggin/pipelinemapper)
+<!-- badges: end -->
 
 Welcome to the pipelinemapper mini-package.
 
@@ -162,19 +163,12 @@ pipeline data frames, then convert to a single graph with
 `graphPipeline()`.
 
 ```{r, eval = FALSE}
-# define pipeline container directories
-pipeline_directory_1 <-
-  "pipelines/pipeline_1" #input
-
-pipeline_directory_2 <-
-  "pipelines/pipeline_2" #ouput
-
 # map each directory
 pipeline_dataframe_1 <-
-  pipelinemapper::mapPipeline(pipeline_directory_1)
+  pipelinemapper::mapPipeline("pipelines/pipeline_1")
 
 pipeline_dataframe_2 <-
-  pipelinemapper::mapPipeline(pipeline_directory_2)
+  pipelinemapper::mapPipeline("pipelines/pipeline_2")
 
 # bind pipeline data frames together
 composite_pipeline_dataframe <-
