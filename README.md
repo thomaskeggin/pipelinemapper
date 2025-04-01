@@ -2,6 +2,10 @@
 Thomas Keggin
 1 Apr, 2025
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaskeggin/pipelinemapper/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 Welcome to the pipelinemapper mini-package.
 
 pipelinemapper is a lightweight tool that allows users to tag input and
