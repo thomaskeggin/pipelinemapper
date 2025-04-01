@@ -8,6 +8,8 @@
 #'
 #' @param pipeline_directory_path The path to the pipeline directory.
 #' @param file_extensions A character vector containing all file extensions to be considered.
+#' @param input_tag A character tag for input paths within the target pipeline
+#' @param output_tag A character tag for output paths within the target pipeline
 #'
 #' @returns A data frame containing five columns: input/output file name,
 #' input/output path, script name, script path, and direction (in or out).
@@ -20,7 +22,9 @@
 
 mapPipeline <-
   function(pipeline_directory_path,
-           file_extensions = c(".r",".rmd",".qmd")){
+           file_extensions = c(".r",".rmd",".qmd"),
+           input_tag = "#input",
+           output_tag = "#output"){
 
     # clean the pipeline path
     pipeline_path_end <-
@@ -56,7 +60,9 @@ mapPipeline <-
 
       project_flow[[script]] <-
         mapScript(paste0(pipeline_directory_path,
-                         script))
+                         script),
+                  input_tag = input_tag,
+                  output_tag = output_tag)
     }
 
     # compile into a single data frame with NAs for scripts without tags
