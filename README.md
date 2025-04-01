@@ -120,7 +120,8 @@ Implementation can be as simple as this:
 ``` r
 # define your pipeline directory containing your scripts.
 pipeline_directory <-
-  "inst/dummy_pipeline/"
+  system.file("dummy_pipeline",
+              package = "pipelinemapper")
 
 # apply mapScript() to all target files in the pipeline directory.
 pipelinemapper::mapPipeline(pipeline_directory_path =  pipeline_directory,
@@ -132,7 +133,7 @@ pipelinemapper::mapPipeline(pipeline_directory_path =  pipeline_directory,
   pipelinemapper::graphPipeline() |> 
   
   # visualise the resultant igraph object
-  pipelinemapper::plotPipeline(use_full_paths = FALSE)
+  pipelinemapper::plotPipeline(show_full_paths = FALSE)
 ```
 
 ![](readme_files/figure-commonmark/unnamed-chunk-5-1.png)
