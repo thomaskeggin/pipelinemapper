@@ -19,6 +19,9 @@ probably easier to refer directly to igraph, ggraph, and ggplot2
 documentation.
 }
 \examples{
-1 + 1
+example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
+pipeline_dataframe <- mapPipeline(example_directory)
+pipeline_graph <- graphPipeline(pipeline_dataframe)
+plotPipeline(pipeline_graph)
 
 }

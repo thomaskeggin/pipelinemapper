@@ -21,8 +21,7 @@ containing the specified file extensions. The inputs and outputs are compiled
 into a single output data frame.
 }
 \examples{
-
-1 + 1
-
+example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
+mapPipeline(example_directory)
 
 }

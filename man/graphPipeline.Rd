@@ -17,7 +17,9 @@ pipeline directory.
 Convert a pipeline input/output data frame into an igraph object.
 }
 \examples{
-1 + 1
+example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
+pipeline_dataframe <- mapPipeline(example_directory)
+graphPipeline(pipeline_dataframe)
 
 
 }

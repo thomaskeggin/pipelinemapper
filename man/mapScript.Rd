@@ -20,6 +20,7 @@ A data frame containing five columns: input/output file name, input/output path,
 Extract input and output files from a pipeline script.
 }
 \examples{
-1 + 1
+example_script <- system.file("dummy_pipeline/01_load_data.R", package = "pipelinemapper")
+mapScript(example_script,input_tag  = "#input",output_tag = "#output")
 
 }
