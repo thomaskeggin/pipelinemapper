@@ -5,7 +5,7 @@ Authors@R:
     person("Thomas", "Keggin", , "placeholder@hotmail.com", role = c("aut", "cre"))
 Description: This package uses user-added input and output path tags to
     map the workflow of a single-directory pipeline.
-License: 'use_mit_license()'
+License: GPL (>= 3) 
 Depends:
     R (>= 3.5.0)
 Imports: 
