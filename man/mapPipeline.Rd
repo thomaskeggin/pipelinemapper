@@ -4,12 +4,21 @@
 \alias{mapPipeline}
 \title{Generates a data frame of file inputs and outputs for scripts within a pipeline directory.}
 \usage{
-mapPipeline(pipeline_directory_path, file_extensions = c(".r", ".rmd", ".qmd"))
+mapPipeline(
+  pipeline_directory_path,
+  file_extensions = c(".r", ".rmd", ".qmd"),
+  input_tag = "#input",
+  output_tag = "#output"
+)
 }
 \arguments{
 \item{pipeline_directory_path}{The path to the pipeline directory.}
 
 \item{file_extensions}{A character vector containing all file extensions to be considered.}
+
+\item{input_tag}{A character tag for input paths within the target pipeline}
+
+\item{output_tag}{A character tag for output paths within the target pipeline}
 }
 \value{
 A data frame containing five columns: input/output file name,
