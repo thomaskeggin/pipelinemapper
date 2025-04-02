@@ -30,7 +30,13 @@ better fit for you.
 
 ### Installation
 
-You can install the development version of pipelinemapper directly from
+You can install the package directly through CRAN.
+
+```{r, eval = FALSE}
+install.packages("pipelinemapper")
+```
+
+Or you can install the development version of pipelinemapper directly from
 the GitHub repository.
 
 ```{r, eval = FALSE}

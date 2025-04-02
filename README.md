@@ -25,8 +25,14 @@ better fit for you.
 
 ### Installation
 
-You can install the development version of pipelinemapper directly from
-the GitHub repository.
+You can install the package directly through CRAN.
+
+``` r
+install.packages("pipelinemapper")
+```
+
+Or you can install the development version of pipelinemapper directly
+from the GitHub repository.
 
 ``` r
 # install.packages("devtools")
@@ -144,7 +150,7 @@ pipelinemapper::mapPipeline(pipeline_directory_path =  pipeline_directory,
   pipelinemapper::plotPipeline(show_full_paths = FALSE)
 ```
 
-![](readme_files/figure-commonmark/unnamed-chunk-5-1.png)
+![](readme_files/figure-commonmark/unnamed-chunk-6-1.png)
 
 #### Note
 
