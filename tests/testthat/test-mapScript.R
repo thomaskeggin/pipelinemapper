@@ -10,6 +10,8 @@ test_that("mapScript() works", {
   # tidy directory
   observed$script_directory <-
     gsub(".*pipelinemapper/","./inst/",observed$script_directory)
+  observed$script <-
+    gsub(".*pipelinemapper/","./inst/",observed$script)
 
   # load in expected result
   expected <-
