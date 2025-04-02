@@ -1,3 +1,3 @@
-# pipelinemapper (development version)
+# pipelinemapper 1.0.0
 
 * Initial CRAN submission.
