@@ -1,23 +1,29 @@
 
-#' Generates a data frame of file inputs and outputs for scripts within a pipeline directory.
+#' A wrapper function that applies mapScript() to target files within a directory.
 #'
-#'This script loops [mapScript()] through all scripts within a target directory
-#' containing the specified file extensions. The inputs and outputs are compiled
+#' This script loops [mapScript()] through all scripts within a target directory
+#' containing the specified file extensions. The input and output paths are compiled
 #' into a single output data frame.
-#'
 #'
 #' @param pipeline_directory_path The path to the pipeline directory.
 #' @param file_extensions A character vector containing all file extensions to be considered.
-#' @param input_tag A character tag for input paths within the target pipeline
-#' @param output_tag A character tag for output paths within the target pipeline
+#' @param input_tag A character tag for input paths within the target pipeline.
+#' @param output_tag A character tag for output paths within the target pipeline.
 #'
-#' @returns A data frame containing five columns: input/output file name,
-#' input/output path, script name, script path, and direction ("in" or "out").
+#' @returns A data frame containing columns describing the target
+#'  pipeline's input and and output paths. See [mapScript()].
+#'
 #' @export
 #'
 #' @examples
-#'example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
-#'mapPipeline(example_directory)
+#'example_directory <-
+#'   system.file("dummy_pipeline",
+#'               package = "pipelinemapper")
+#'
+#'mapPipeline(pipeline_directory_path = example_directory,
+#'            file_extensions = c(".r",".rmd",".qmd"),
+#'            input_tag = "#input",
+#'            output_tag = "#output")
 #'
 
 mapPipeline <-
@@ -69,16 +75,6 @@ mapPipeline <-
     pipeline_dataframe <-
       do.call(rbind.data.frame,
               project_flow)
-
-    pipeline_dataframe$file <-
-      paste(pipeline_dataframe$file_directory,
-            pipeline_dataframe$file_basename,
-            sep = "/")
-
-    pipeline_dataframe$script <-
-      paste(pipeline_dataframe$script_directory,
-            pipeline_dataframe$script_basename,
-            sep = "/")
 
     # return compiled data frame
     return(pipeline_dataframe)
