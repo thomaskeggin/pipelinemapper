@@ -30,6 +30,7 @@
 #' plotPipeline(pipeline_graph = target_pipeline_graph,
 #'              show_full_paths = TRUE)
 #'
+#' @importFrom rlang .data
 
 plotPipeline <-
   function(pipeline_graph,
@@ -45,15 +46,15 @@ plotPipeline <-
 
     # generate plot
     ggraph::ggraph(pipeline_graph,
-                   layout = "sugiyama", #"tree" "sugiyama"
+                   layout = "sugiyama",
                    circular = FALSE) +
 
       # nodes
-      ggraph::geom_node_point(ggplot2::aes(colour = type)) +
+      ggraph::geom_node_point(ggplot2::aes(colour = .data$type)) +
       ggraph::geom_node_label(repel = TRUE,
-                              ggplot2::aes(#label = str_wrap(name, width = 10),
-                                label = sub(".*? ", "", name),
-                                fill = type)) +
+                              ggplot2::aes(
+                                label = sub(".*? ", "", .data$name),
+                                fill = .data$type)) +
 
       # edges
       ggraph::geom_edge_diagonal(arrow = ggplot2::arrow(length = ggplot2::unit(4, 'mm'),type = "closed"),

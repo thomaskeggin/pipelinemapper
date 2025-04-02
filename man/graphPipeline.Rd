@@ -29,5 +29,4 @@ target_pipeline_dataframe <-
 
 graphPipeline(pipeline_dataframe = target_pipeline_dataframe)
 
-
 }

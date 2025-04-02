@@ -31,6 +31,7 @@
 #'           output_tag = "#output")
 #'
 #' @export
+#' @importFrom rlang .data
 
 mapScript <-
   function(script_path,
@@ -67,7 +68,7 @@ mapScript <-
       do.call(rbind.data.frame,in_out) |>
 
       # and convert ' to "
-      dplyr::mutate(file = gsub("'",'"',file))
+      dplyr::mutate(file = gsub("'",'"',.data$file))
 
 
     # skip if no lines are tagged
@@ -114,15 +115,15 @@ mapScript <-
                                            extract = TRUE))) |>
         dplyr::mutate(script_directory = dirname(script_path),
                       script_basename  = basename(script_path),
-                      file_directory   = dirname(file),
-                      file_basename    = basename(file)) |>
-        dplyr::relocate(file_basename, .after = file_directory) |>
-        dplyr::select(-file) |>
-        dplyr::mutate(file = paste(file_directory,
-                                   file_basename,
+                      file_directory   = dirname(.data$file),
+                      file_basename    = basename(.data$file)) |>
+        dplyr::relocate("file_basename", .after = "file_directory") |>
+        dplyr::select(-"file") |>
+        dplyr::mutate(file = paste(.data$file_directory,
+                                   .data$file_basename,
                                    sep = "/"),
-                      script = paste(script_directory,
-                                     script_basename,
+                      script = paste(.data$script_directory,
+                                     .data$script_basename,
                                      sep = "/"))
 
       return(flow_df)
