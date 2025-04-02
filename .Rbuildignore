@@ -3,3 +3,7 @@
 ^\.github$
 ^LICENSE\.md$
 ^cran-comments\.md$
+^readme\.md$
+^readme\.qmd$
+^readme_files$
+
