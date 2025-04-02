@@ -9,7 +9,7 @@ License: GPL (>= 3)
 URL: https://github.com/thomaskeggin/pipelinemapper
 BugReports: https://github.com/thomaskeggin/pipelinemapper/issues
 Depends:
-    R (>= 4.4.0)
+    R (>= 4.1.0)
 Imports: 
     dplyr,
     ggplot2,
