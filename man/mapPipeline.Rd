@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapPipeline.R
 \name{mapPipeline}
 \alias{mapPipeline}
-\title{Generates a data frame of file inputs and outputs for scripts within a pipeline directory.}
+\title{A wrapper function that applies mapScript() to target files within a directory.}
 \usage{
 mapPipeline(
   pipeline_directory_path,
@@ -16,21 +16,27 @@ mapPipeline(
 
 \item{file_extensions}{A character vector containing all file extensions to be considered.}
 
-\item{input_tag}{A character tag for input paths within the target pipeline}
+\item{input_tag}{A character tag for input paths within the target pipeline.}
 
-\item{output_tag}{A character tag for output paths within the target pipeline}
+\item{output_tag}{A character tag for output paths within the target pipeline.}
 }
 \value{
-A data frame containing five columns: input/output file name,
-input/output path, script name, script path, and direction ("in" or "out").
+A data frame containing columns describing the target
+pipeline's input and and output paths. See \code{\link[=mapScript]{mapScript()}}.
 }
 \description{
 This script loops \code{\link[=mapScript]{mapScript()}} through all scripts within a target directory
-containing the specified file extensions. The inputs and outputs are compiled
+containing the specified file extensions. The input and output paths are compiled
 into a single output data frame.
 }
 \examples{
-example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
-mapPipeline(example_directory)
+example_directory <-
+  system.file("dummy_pipeline",
+              package = "pipelinemapper")
+
+mapPipeline(pipeline_directory_path = example_directory,
+           file_extensions = c(".r",".rmd",".qmd"),
+           input_tag = "#input",
+           output_tag = "#output")
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapScript.R
 \name{mapScript}
 \alias{mapScript}
-\title{Extract input and output files from a pipeline script.}
+\title{Extract tagged input and output paths from a script.}
 \usage{
 mapScript(script_path, input_tag = "#input", output_tag = "#output")
 }
@@ -14,13 +14,32 @@ mapScript(script_path, input_tag = "#input", output_tag = "#output")
 \item{output_tag}{A character tag for output paths within the target script.}
 }
 \value{
-A data frame containing five columns: input/output file name, input/output path, script name, script path, and direction ("in" or "out")
+A data frame containing the following columns describing the target
+script's input and and output paths.
+
+\item{line}{integer. The line the path is present on within the script.}
+\item{direction}{character. Values are either "in" or "out" to differentiate input or output files.}
+\item{script_directory}{character. The path to the script's directory.}
+\item{script_basename}{character. The script's basename.}
+\item{file_directory}{character. The path to the input or output file's directory.}
+\item{file_basename}{character. The input or output file's basename.}
+\item{file}{character. The input or output file's full path.}
+\item{script}{character. The script's full path.}
 }
 \description{
-Extract input and output files from a pipeline script.
+mapScript() extracts tagged input and output paths from a script. The target script is
+read into memory and queried for the user-specified input and output tags.
+Character strings on these tagged lines are assumed to be file paths, are
+extracted, split into their respective directory paths (\code{\link[=dirname]{dirname()}}) and base
+names (\code{\link[=basename]{basename()}}), then compiled into a data frame as detailed below.
 }
 \examples{
-example_script <- system.file("dummy_pipeline/01_load_data.R", package = "pipelinemapper")
-mapScript(example_script,input_tag  = "#input",output_tag = "#output")
+example_script_path <-
+  system.file("dummy_pipeline/01_load_data.R",
+              package = "pipelinemapper")
+
+mapScript(example_script_path,
+          input_tag = "#input",
+          output_tag = "#output")
 
 }

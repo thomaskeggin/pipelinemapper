@@ -9,22 +9,33 @@ plotPipeline(pipeline_graph, show_full_paths = TRUE)
 \arguments{
 \item{pipeline_graph}{A pipeline igraph object returned by \code{\link[=graphPipeline]{graphPipeline()}}.}
 
-\item{show_full_paths}{Whether or not full file paths should be displayed.
-show_full_paths = FALSE only displays the file basenames.}
+\item{show_full_paths}{logical. Whether or not full file paths should be displayed.
+show_full_paths = FALSE only displays the file base names.}
 }
 \value{
-A ggraph plot object
+A ggraph/gg/ggplot plot object.
 }
 \description{
-This is a default way of plotting the igraph object returned by \code{\link[=graphPipeline]{graphPipeline()}}
-using ggraph and ggplot2. If you would like to customise the plot, it is
+This is an example method for plotting the igraph object returned by \code{\link[=graphPipeline]{graphPipeline()}}
+using ggraph and ggplot2. If you would like to further customise the plot, it is
 probably easier to refer directly to igraph, ggraph, and ggplot2
 documentation.
 }
 \examples{
-example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
-pipeline_dataframe <- mapPipeline(example_directory)
-pipeline_graph <- graphPipeline(pipeline_dataframe)
-plotPipeline(pipeline_graph, show_full_paths = TRUE)
+example_directory <-
+   system.file("dummy_pipeline",
+               package = "pipelinemapper")
+
+target_pipeline_dataframe <-
+   mapPipeline(pipeline_directory_path = example_directory,
+               file_extensions = c(".r",".rmd",".qmd"),
+               input_tag = "#input",
+               output_tag = "#output")
+
+target_pipeline_graph <-
+   graphPipeline(pipeline_dataframe = target_pipeline_dataframe)
+
+plotPipeline(pipeline_graph = target_pipeline_graph,
+             show_full_paths = TRUE)
 
 }

@@ -2,24 +2,32 @@
 % Please edit documentation in R/graphPipeline.R
 \name{graphPipeline}
 \alias{graphPipeline}
-\title{Convert a pipeline input/output data frame into an igraph object.}
+\title{Convert an input/output path data frame into an igraph object.}
 \usage{
 graphPipeline(pipeline_dataframe)
 }
 \arguments{
-\item{pipeline_dataframe}{An input/output data frame returned by \code{\link[=mapPipeline]{mapPipeline()}}.}
+\item{pipeline_dataframe}{An input/output data frame returned by \code{\link[=mapScript]{mapScript()}} or \code{\link[=mapPipeline]{mapPipeline()}}.}
 }
 \value{
-A directional igraph describing the workflow of the mapped
-pipeline.
+A directional igraph graph object representing where vertices are
+scripts or files and edges are inputs or output relationships.
 }
 \description{
-Convert a pipeline input/output data frame into an igraph object.
+Convert an input/output path data frame into an igraph object.
 }
 \examples{
-example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
-pipeline_dataframe <- mapPipeline(example_directory)
-graphPipeline(pipeline_dataframe)
+example_directory <-
+   system.file("dummy_pipeline",
+               package = "pipelinemapper")
+
+target_pipeline_dataframe <-
+   mapPipeline(pipeline_directory_path = example_directory,
+               file_extensions = c(".r",".rmd",".qmd"),
+               input_tag = "#input",
+               output_tag = "#output")
+
+graphPipeline(pipeline_dataframe = target_pipeline_dataframe)
 
 
 }

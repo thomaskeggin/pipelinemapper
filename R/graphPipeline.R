@@ -1,17 +1,25 @@
 
-#' Convert a pipeline input/output data frame into an igraph object.
+#' Convert an input/output path data frame into an igraph object.
 #'
-#' @param pipeline_dataframe An input/output data frame returned by [mapPipeline()].
+#' @param pipeline_dataframe An input/output data frame returned by [mapScript()] or [mapPipeline()].
 #'
-#' @returns A directional igraph describing the workflow of the mapped
-#' pipeline.
+#' @returns A directional igraph graph object representing where vertices are
+#'  scripts or files and edges are inputs or output relationships.
 #'
 #' @export
 #'
 #' @examples
-#' example_directory <- system.file("dummy_pipeline", package = "pipelinemapper")
-#' pipeline_dataframe <- mapPipeline(example_directory)
-#' graphPipeline(pipeline_dataframe)
+#' example_directory <-
+#'    system.file("dummy_pipeline",
+#'                package = "pipelinemapper")
+#'
+#' target_pipeline_dataframe <-
+#'    mapPipeline(pipeline_directory_path = example_directory,
+#'                file_extensions = c(".r",".rmd",".qmd"),
+#'                input_tag = "#input",
+#'                output_tag = "#output")
+#'
+#' graphPipeline(pipeline_dataframe = target_pipeline_dataframe)
 #'
 #'
 
