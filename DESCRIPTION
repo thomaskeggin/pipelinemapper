@@ -1,11 +1,13 @@
 Package: pipelinemapper
-Title: Maps script-based pipeline data flows based on path tags
-Version: 0.0.0.9000
+Title: Maps Script-Based Pipeline Data Flows Based on Path Tags
+Version: 1.0.0
 Authors@R: 
     person("Thomas", "Keggin", , "thomaskeggin@hotmail.com", role = c("aut", "cre", "cph"))
-Description: This package uses input and output path tags to
-    map the workflow of script-based data pipelines.
-License: GPL (>= 3) 
+Description: Uses input and output path tags to map the
+    workflow of script-based data pipelines.
+License: GPL (>= 3)
+URL: https://github.com/thomaskeggin/pipelinemapper
+BugReports: https://github.com/thomaskeggin/pipelinemapper/issues
 Depends:
     R (>= 3.5.0)
 Imports: 
