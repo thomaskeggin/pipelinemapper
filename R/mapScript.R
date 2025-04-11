@@ -62,17 +62,15 @@ mapScript <-
                    file = file[grepl(output_tag,file)])
     }
 
-    # combine inputs and outputs
+    # stop if no tags at all are found
+    if(length(in_out) > 0){
 
-    in_out_df <-
-      do.call(rbind.data.frame,in_out) |>
+      # combine inputs and outputs
+      in_out_df <-
+        do.call(rbind.data.frame,in_out) |>
 
-      # and convert ' to "
-      dplyr::mutate(file = gsub("'",'"',.data$file))
-
-
-    # skip if no lines are tagged
-    if(length(in_out_df) > 0){
+        # and convert ' to "
+        dplyr::mutate(file = gsub("'",'"',.data$file))
 
       # check for broken paths
       for(i in 1:dim(in_out_df)[1]){
@@ -91,8 +89,9 @@ mapScript <-
         # check for multiple strings on a single line
         if(length(tagged_line_path) > 1){
 
-          stop(paste("There are multiple strings on line",line,"in file",script_path,".\n
-                   Tagged lines can only contain one string."))
+          stop(paste("There are multiple strings on line",
+                     line,"in file",script_path,
+                     ".\nTagged lines can only contain one string."))
         }
 
         # check for missing strings
@@ -100,8 +99,9 @@ mapScript <-
 
           line <- in_out_df$line[i]
 
-          stop(paste("There is a missing path string on line",line," in file",script_path,".\n
-                   Tagged lines must contain a single string."))
+          stop(paste("There is a missing path string on line",
+                     line," in file",script_path,
+                     ".\nTagged lines must contain a single string."))
         }
       }
 
